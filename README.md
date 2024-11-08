@@ -1,8 +1,29 @@
-# React + Vite
+# FormBuilder-frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+This is a simple frontend for a Form Builder Application lets users create, edit, and view customizable forms with different input types (text, email, password, number, date) and additional parameters like title and placeholder. using react.
 
-Currently, two official plugins are available:
+## Setup the project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Download project from github and open it in your favourite text editor.
+- Go inside the frontend folder and execute the following command:
+
+```
+npm install
+```
+
+- In the constants directory change backendUrl to your backendUrl.
+- To run the client execute
+
+```
+npm run dev
+```
+
+ ### Folder Structure - Frontend
+
+ `src` -> Inside the src folder all the actual source code regarding the project will reside, this will not include any kind of tests.
+
+Lets take a look inside the `src` folder
+
+ - `components` -> This folder contains all the reusable UI components.
+ - `constants` -> contains constant variables.
