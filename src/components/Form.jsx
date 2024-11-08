@@ -2,6 +2,7 @@ import axios from "axios";
 import { backendUrl } from "../constants";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { validateField } from "../utils/validate";
 
 const Form = () => {
   const { id } = useParams();
@@ -28,20 +29,9 @@ const Form = () => {
     formData?.fields.forEach((field, index) => {
       const inputValue = e.target.elements[`input-${index}`].value;
 
-      if (field.inputType === "email" && !validateEmail(inputValue)) {
-        formErrors[`field-${index}`] = "Please enter a valid email address.";
-      } else if (
-        (field.inputType === "number" && isNaN(inputValue)) ||
-        !inputValue
-      ) {
-        formErrors[`field-${index}`] = "Please enter a valid number.";
-      } else if (field.inputType === "text" && inputValue.trim() === "") {
-        formErrors[`field-${index}`] = "This field is required.";
-      } else if (field.inputType === "password" && inputValue.length < 6) {
-        formErrors[`field-${index}`] =
-          "Password must be at least 6 characters long.";
-      } else if (field.inputType === "date" && !inputValue) {
-        formErrors[`field-${index}`] = "Please select a date.";
+      const error = validateField(inputValue, field); 
+      if (error) {
+        formErrors[`field-${index}`] = error;
       }
     });
 
@@ -52,9 +42,20 @@ const Form = () => {
     }
   };
 
-  const validateEmail = (email) => {
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    return regex.test(email);
+  const handleInputChange = (e, index) => {
+    const inputValue = e.target.value;
+    let formErrors = { ...errors };
+
+    const field = formData?.fields[index];
+    const error = validateField(inputValue, field); 
+
+    if (error) {
+      formErrors[`field-${index}`] = error;
+    } else {
+      delete formErrors[`field-${index}`]; 
+    }
+
+    setErrors(formErrors);
   };
 
   return (
@@ -73,6 +74,7 @@ const Form = () => {
                 type={field.inputType}
                 placeholder={field.placeholder}
                 className="border-0 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500"
+                onChange={(e) => handleInputChange(e, index)}
               />
               {errors[`field-${index}`] && (
                 <p className="text-red-500 text-sm">
