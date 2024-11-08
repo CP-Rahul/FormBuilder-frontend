@@ -31,7 +31,7 @@ const App = () => {
         <button className="bg-green-800 text-white p-2 max-w-sm rounded">
           <Link to={"/form/create"}>Create New Form</Link>
         </button>
-        <hr class="border-t border-gray-400 w-3/4 mx-auto mt-2" />
+        <hr className="border-t border-gray-400 w-3/4 mx-auto mt-2" />
       </div>
       <div className="w-3/4 mx-auto">
         <h1 className="text-4xl mt-10">Forms</h1>

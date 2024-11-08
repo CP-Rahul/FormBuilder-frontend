@@ -28,14 +28,14 @@ const FormBuilder = () => {
     setEditingFieldIndex(index);
   };
 
-  const addField = (type) => {
+  const addField = (inputType) => {
     if (fields.length >= 20) {
       window.alert("You can only add up to 20 fields.");
       return;
     }
     setFields((prevFields) => [
       ...prevFields,
-      { type, label: "", placeholder: "", readOnly: true },
+      { inputType, label: "", placeholder: "", readOnly: true },
     ]);
   };
 
@@ -109,7 +109,7 @@ const FormBuilder = () => {
                       <label>{field.label || "Title"}</label>
                       <input
                         className="border-0 border-b-2 border-gray-400 focus:outline-none focus:border-blue-500"
-                        type={field.type}
+                        type={field.inputTypeype}
                         readOnly={field.readOnly}
                       />
                     </div>
@@ -187,7 +187,7 @@ const FormBuilder = () => {
             editingFieldIndex !== null &&
             fields[editingFieldIndex] && (
               <FormEditor
-                type={fields[editingFieldIndex].type}
+                type={fields[editingFieldIndex].inputType}
                 label={fields[editingFieldIndex].label}
                 placeholder={fields[editingFieldIndex].placeholder}
                 updateField={updateField}
